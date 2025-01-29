@@ -1,0 +1,156 @@
+/* General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #FDF9F6;
+    scroll-behavior: smooth;
+}
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Ensures spacing between hero and image sections */
+    min-height: 100vh; /* Full viewport height */
+    text-align: center;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.navbar-right .login-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navbar-right .login-button:hover {
+    background-color: #444;
+}
+
+/* Hero Section */
+.hero-section {
+    margin-top: 50px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+}
+
+.hero-title .rotating-word {
+    display: inline-block;
+    color: #ff6f61; /* Highlighted color */
+    font-size: 56px; /* Slightly larger than the main text */
+    font-weight: bold;
+    animation: word-transition 2s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #444;
+}
+
+/* Image Section */
+.image-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto; /* Pushes the image section to the bottom */
+    padding: 20px 0;
+}
+
+.hero-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Curved Container */
+.curved-container {
+    background-color: #cfdbf4; /* Light grayish-blue background */
+    border-radius: 20px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the container */
+    max-width: 90%; /* Limit the width of the container */
+    margin: 40px auto; /* Center horizontally and add spacing above */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Image Styling */
+.curved-image {
+    width: 90%; /* Adjust image width */
+    max-width: 800px; /* Limit maximum size */
+    border-radius: 10px; /* Optional: Add slight rounding to the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for image */
+}
+
+/* Curved Container */
+.curved-container {
+    background-color: #cfdbf4; /* Light grayish-blue background */
+    border-radius: 20px; /* Rounded corners */
+    padding: 40px; /* Increased spacing inside the container */
+    max-width: 95%; /* Wider width */
+    width: 100%; /* Ensure it takes full width when necessary */
+    margin: 50px auto; /* Center horizontally and add spacing above */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Image Styling */
+.curved-image {
+    width: 85%; /* Adjust image width */
+    max-width: 1000px; /* Limit maximum size for larger containers */
+    border-radius: 10px; /* Optional: Add slight rounding to the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for image */
+}
+

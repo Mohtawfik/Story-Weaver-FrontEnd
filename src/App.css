@@ -1,0 +1,91 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #FDF9F6; /* Beige background color */
+  font-family: Arial, sans-serif; /* Set a global font for consistency */
+  height: 100%;
+  scroll-behavior: smooth;
+
+}
+
+
+.ReactTags__tags {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f9f9f9;
+}
+
+.ReactTags__tag {
+  background-color: #b4c5b5;
+  color: #292828;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.ReactTags__tag a {
+  margin-left: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ReactTags__tagInputField {
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* Style the select dropdown */
+.custom-select {
+  width: 220px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+}
+
+/* Add a dropdown arrow for the select */
+.custom-select::-ms-expand {
+  display: none;
+}
+
+/* Style the dropdown options */
+.custom-select option {
+  background-color: white; /* Make the options stand out */
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+/* Hover effect for options */
+.custom-select option:hover {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+/* Active/selected option styling */
+.custom-select option:checked {
+  background-color: black;
+  color: white;
+}
+
+
+
+

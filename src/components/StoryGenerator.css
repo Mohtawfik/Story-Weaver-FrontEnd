@@ -1,0 +1,33 @@
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    gap: 8px;
+}
+
+.custom-tag {
+    background-color: #cfe1d5;
+    color: #5a5a5a;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.custom-remove {
+    color: #180a0a; /* Customize "X" color */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.custom-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+}
