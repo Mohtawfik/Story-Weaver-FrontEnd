@@ -8,7 +8,7 @@ export const generateStory = async (keywords, length) => {
     try {
         console.log(keywords);
         
-        const response = await fetch(`${BASE_URL}/generate-story`, {
+        const response = await fetch(`${API_BASE_URL}/generate-story`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
