@@ -6,9 +6,12 @@ import SignUp from "./components/SignUp";
 import StoryGenerator from "./components/StoryGenerator";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// Dynamically set basename for GitHub Pages
+const basename = process.env.NODE_ENV === "production" ? "/Story-Weaver-FrontEnd" : "";
+
 const App = () => {
     return (
-        <Router>
+        <Router basename={basename}>
             <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<HomePage />} />
