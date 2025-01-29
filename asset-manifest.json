@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Mohtawfik/Story-Weaver-FrontEnd/static/css/main.3029fa94.css",
+    "main.js": "/Mohtawfik/Story-Weaver-FrontEnd/static/js/main.7f9e75e3.js",
+    "index.html": "/Mohtawfik/Story-Weaver-FrontEnd/index.html",
+    "main.3029fa94.css.map": "/Mohtawfik/Story-Weaver-FrontEnd/static/css/main.3029fa94.css.map",
+    "main.7f9e75e3.js.map": "/Mohtawfik/Story-Weaver-FrontEnd/static/js/main.7f9e75e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3029fa94.css",
+    "static/js/main.7f9e75e3.js"
+  ]
+}
