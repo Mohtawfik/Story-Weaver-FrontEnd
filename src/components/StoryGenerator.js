@@ -10,9 +10,13 @@ import { useNavigate } from "react-router-dom"; // Import for navigation
 
 import CustomDropdown from "./CustomDropdown";
 
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
+
+
 
 const StoryGenerator = () => {
     const navigate = useNavigate(); // Initialize navigation
+
 
     const [tags, setTags] = useState([]);
     const [length, setLength] = useState("Medium");
@@ -49,7 +53,7 @@ const StoryGenerator = () => {
         setIsNewStory(true); // ✅ Set the flag for a new story
     
         try {
-            const response = await axios.post("http://localhost:5001/generate-story", {
+            const response = await axios.post(`${API_BASE_URL}/generate-story`, {
                 keywords: tags,
                 length,
             });
@@ -83,7 +87,7 @@ const StoryGenerator = () => {
             if (isNewStory) {
                 // ✅ Create a New Story and Add it to the List
                 const response = await axios.post(
-                    "http://localhost:5001/stories",
+                    `${API_BASE_URL}/stories`,
                     { title: generatedTitle, story: editedStory, keywords: tags, length },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -106,7 +110,7 @@ const StoryGenerator = () => {
                 }
     
                 await axios.put(
-                    `http://localhost:5001/stories/${currentStoryId}`,
+                    `${API_BASE_URL}/stories/${currentStoryId}`,
                     { story: editedStory },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -130,7 +134,7 @@ const StoryGenerator = () => {
             }
     
             const response = await axios.put(
-                `http://localhost:5001/stories/${currentStoryId}`, // Use the correct story ID
+                `${API_BASE_URL}/stories/${currentStoryId}`, // Use the correct story ID
                 { story: editedStory },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -154,7 +158,7 @@ const StoryGenerator = () => {
                 const token = localStorage.getItem("token");
                 if (!token) return;
     
-                const response = await axios.get("http://localhost:5001/stories", {
+                const response = await axios.get(`${API_BASE_URL}/stories`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
     
@@ -177,7 +181,7 @@ const StoryGenerator = () => {
             const token = localStorage.getItem("token");
             if (!token) return;
     
-            const response = await axios.get(`http://localhost:5001/stories/${storyId}`, {
+            const response = await axios.get(`${API_BASE_URL}/stories/${storyId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
     

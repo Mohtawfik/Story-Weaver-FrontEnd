@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
+
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -8,11 +10,12 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5001/auth/register", {
+            await axios.post(`${API_BASE_URL}/auth/register`, {
                 name,
                 email,
                 password,
