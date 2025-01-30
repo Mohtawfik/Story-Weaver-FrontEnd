@@ -225,7 +225,8 @@ const StoryGenerator = () => {
                 >
                     {loading ? "Generating..." : "Generate Story"}
                 </button>
-                <div style={styles.savedStoriesContainer}>
+                { savedStories.length > 0 && (
+                    <div style={styles.savedStoriesContainer}>
                     <h2 style={styles.savedStoriesHeading}>Saved Stories</h2>
                     <div style={styles.savedStoriesList}>
                         {savedStories.map((story) => (
@@ -236,15 +237,17 @@ const StoryGenerator = () => {
                         ))}
                     </div>
                 </div>
+                ) }
+                
 
 
 
 
 
 
-                <button style={styles.logoutButton} onClick={handleLogout}>
-                    Logout
-                </button>
+                <div style={styles.logoutContainer}>
+                    <button style={styles.logoutButton} onClick={handleLogout}>Logout</button>
+                </div>
             </div>
 
             {/* Right Pane */}
@@ -296,7 +299,7 @@ const styles = {
         borderRight: "1px solid #ddd",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start",
+        height: "100vh",
     },
     rightPane: {
         flex: 2,
@@ -346,6 +349,11 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         fontSize: "16px",
+        fontWeight: "bold",
+    },
+    logoutContainer: {
+        marginTop: "auto", // ✅ Pushes logout button to the bottom
+        paddingTop: "20px", // Adds spacing above the button
     },
     
     storyText: {
@@ -388,6 +396,7 @@ const styles = {
         borderRadius: "5px",
         cursor: "pointer",
         fontSize: "16px",
+        fontWeight: "bold",
     },
     
     storyTitle: {
@@ -448,9 +457,10 @@ const styles = {
     storyItem: {
         padding: "10px",
         borderBottom: "1px solid #fff",
+        borderRadius: "9px",
         cursor: "pointer",
         transition: "background-color 0.2s ease",
-        backgroundColor: "#E9E9E9", // White background for each item
+        backgroundColor: "#EFEEEE",
         paddingBottom: "16px",
     },
     storyItemHover: {
@@ -479,7 +489,7 @@ const styles = {
     logoutButton: {
         width: "100%",
         padding: "10px",
-        backgroundColor: "#e74c3c", // Red color for logout
+        backgroundColor: "#9A6E69", // Red color for logout
         color: "white",
         border: "none",
         borderRadius: "5px",
