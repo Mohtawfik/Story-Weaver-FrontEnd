@@ -53,7 +53,7 @@ const HomePage = () => {
             {/* Image Section */}
             <div className="curved-container">
                 <img
-                    src="/images/story-weaver-sample.png" // Replace with your image path
+                    src={`${process.env.PUBLIC_URL}/images/story-weaver-sample.png`} // Replace with your image path
                     alt="Illustration"
                     className="curved-image"
                 />
