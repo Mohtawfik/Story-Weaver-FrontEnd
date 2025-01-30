@@ -3,6 +3,7 @@ import "../App.css";
 import axios from "axios"; // Import axios for API calls
 import CustomTags from "./CustomTags";
 import "./StoryGenerator.css"; // New styles for tags
+import { BiLogOut } from "react-icons/bi";
 
 import { useEffect } from "react"; // Add useEffect to handle story fetching
 import { useNavigate } from "react-router-dom"; // Import for navigation
@@ -38,7 +39,6 @@ const StoryGenerator = () => {
 
 
     const handleTagsChange = (newTags) => {
-        console.log("Received Tags in StoryGenerator:", newTags); // Debugging
         setTags(newTags);
     };
 
@@ -68,15 +68,20 @@ const StoryGenerator = () => {
     
 
     const handleLogout = () => {
-        localStorage.removeItem("token"); // Clear the token
-        navigate("/login"); // Redirect to login page
+        
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
+        if (confirmLogout) {
+            localStorage.removeItem("token"); // Clear the token
+            navigate("/login");
+        }
     };
 
     const handleSaveStory = async () => {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
-                setSaveMessage("Please log in to save your story.");
+                alert("Please log in to save your story.");
+                navigate("/login");
                 return;
             }
     
@@ -97,7 +102,7 @@ const StoryGenerator = () => {
                 setSavedStories((prevStories) => [newStory, ...prevStories]); // ✅ Add new story to the list
                 setCurrentStoryId(response.data.story_id);
                 setIsNewStory(false);
-                setSaveMessage("Story saved successfully!");
+                alert("Story saved successfully!");
             } else {
                 // ✅ Edit an Existing Story
                 if (!currentStoryId) {
@@ -111,10 +116,10 @@ const StoryGenerator = () => {
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
     
-                setSaveMessage("Story updated successfully!");
+                alert("Story updated successfully!");
             }
         } catch (error) {
-            setSaveMessage("Failed to save the story.");
+            alert("Failed to save the story.");
         }
     };
     
@@ -198,7 +203,13 @@ const StoryGenerator = () => {
         <div style={styles.container}>
             {/* Left Pane */}
             <div style={styles.leftPane}>
-                <h2 style={styles.title} onClick={() => navigate("/")}>Story-Weaver</h2>
+                {/* <h2 style={styles.title} onClick={() => navigate("/")}>Story-Weaver</h2> */}
+                <div style={styles.header}>
+                    <h2 style={styles.title} onClick={() => navigate("/")}>Story-Weaver</h2>
+                    <span style={styles.logoutIcon} onClick={handleLogout} title="Logout">
+                        <BiLogOut size={24} />
+                    </span>
+                </div>
                 <p style={styles.subtitle}>Enter keywords and select story length:</p>
                 <CustomTags onTagsChange={handleTagsChange} />
                 
@@ -241,9 +252,9 @@ const StoryGenerator = () => {
 
 
 
-                <div style={styles.logoutContainer}>
+                {/* <div style={styles.logoutContainer}>
                     <button style={styles.logoutButton} onClick={handleLogout}>Logout</button>
-                </div>
+                </div> */}
             </div>
 
             {/* Right Pane */}
@@ -252,6 +263,11 @@ const StoryGenerator = () => {
                     <div style={styles.storyContainer}>
                         <div style={styles.storyHeader}>
                             <h2 style={styles.storyTitle}>{generatedTitle}</h2>
+                            <span style={styles.saveButtonContainer}>
+                                <button style={styles.saveButton} onClick={handleSaveStory}>
+                                    {isNewStory ? "Save New Story" : "Update Story"}
+                                </button>
+                            </span>
                         </div>
 
                         <textarea
@@ -261,11 +277,11 @@ const StoryGenerator = () => {
                             placeholder="Start writing your story here..."
                         />
 
-                        <div style={styles.saveButtonContainer}>
-                        <button style={styles.saveButton} onClick={handleSaveStory}>
-                            {isNewStory ? "Save New Story" : "Update Story"}
-                        </button>
-                        </div>
+                        {/* <div style={styles.saveButtonContainer}>
+                            <button style={styles.saveButton} onClick={handleSaveStory}>
+                                {isNewStory ? "Save New Story" : "Update Story"}
+                            </button>
+                        </div> */}
                     </div>
                 ) : (
                     <p style={styles.placeholder}>Your story will appear here once generated or selected.</p>
@@ -289,8 +305,14 @@ const styles = {
         borderTop: "1px solid #ddd",
         borderBottom: "1px solid #ddd",
     },
+    header: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "#FDF9F6",
+    },
     leftPane: {
-        flex: 1, // 1/3 of the width
+        flex: 1.1, // 1/3 of the width
         padding: "20px",
         borderRight: "1px solid #ddd",
         display: "flex",
@@ -298,7 +320,7 @@ const styles = {
         height: "100vh",
     },
     rightPane: {
-        flex: 2,
+        flex: 3,
         padding: "20px",
         display: "flex",
         flexDirection: "column",
@@ -327,25 +349,23 @@ const styles = {
         border: "none",
         outline: "none",
         resize: "none",
-        minHeight: "450px", // ✅ Prevents textarea from being too short
+        minHeight: "480px", // ✅ Prevents textarea from being too short
         maxHeight: "75vh", // ✅ Ensures it doesn't take over the screen
         backgroundColor: "transparent",
     },
     saveButtonContainer: {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "right",
         padding: "10px 0",
     },
     saveButton: {
-        width: "100%",
         padding: "12px",
-        backgroundColor: "black",
+        backgroundColor: "#797679",
         color: "white",
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
         fontSize: "16px",
-        fontWeight: "bold",
     },
     logoutContainer: {
         marginTop: "auto", // ✅ Pushes logout button to the bottom
@@ -361,8 +381,16 @@ const styles = {
     title: {
         fontSize: "24px",
         fontWeight: "bold",
-        marginBottom: "10px",
         cursor: "pointer",
+    },
+    logoutIcon: {
+        fontSize: "24px",
+        cursor: "pointer",
+        transition: "color 0.2s, transform 0.2s",
+    },
+    logoutIconHover: {
+        color: "#ff4d4d", // Red color on hover
+        transform: "translateX(-3px)", // Moves left slightly on hover
     },
     subtitle: {
         fontSize: "16px",
@@ -380,19 +408,19 @@ const styles = {
     select: {
         width: "100%",
         padding: "10px",
-        border: "1px solid #ddd",
+        border: "2px solid #ddd",
         borderRadius: "5px",
+        backgroundColor: "#f8f8f8",
     },
     button: {
         padding: "10px",
         marginTop: "20px",
-        backgroundColor: "black",
+        backgroundColor: "#797679",
         color: "white",
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
         fontSize: "16px",
-        fontWeight: "bold",
     },
     
     storyTitle: {
@@ -428,7 +456,7 @@ const styles = {
         backgroundColor: "#f9f9f9",
         borderRadius: "5px",
         padding: "0", // Remove padding to avoid content shifting
-        maxHeight: "450px", // Set height limit
+        maxHeight: "550px", // Set height limit
         overflow: "hidden", // Prevent content from overflowing
         display: "flex",
         flexDirection: "column",
@@ -465,7 +493,7 @@ const styles = {
 
 
     storyContainer: {
-        backgroundColor: "#fff",
+        backgroundColor: "#f4f0f0",
         borderRadius: "5px",
         padding: "15px",
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
