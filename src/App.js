@@ -1,17 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom"; // ✅ Use HashRouter
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import StoryGenerator from "./components/StoryGenerator";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-// Dynamically set basename for GitHub Pages
-const basename = process.env.NODE_ENV === "production" ? "/Story-Weaver-FrontEnd" : "";
-
 const App = () => {
     return (
-        <Router basename={basename}>
+        <Router>
             <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<HomePage />} />
