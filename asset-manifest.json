@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Story-Weaver-FrontEnd/static/css/main.739a4b8b.css",
-    "main.js": "/Story-Weaver-FrontEnd/static/js/main.19d0e5aa.js",
-    "index.html": "/Story-Weaver-FrontEnd/index.html",
-    "main.739a4b8b.css.map": "/Story-Weaver-FrontEnd/static/css/main.739a4b8b.css.map",
-    "main.19d0e5aa.js.map": "/Story-Weaver-FrontEnd/static/js/main.19d0e5aa.js.map"
+    "main.css": "./static/css/main.739a4b8b.css",
+    "main.js": "./static/js/main.2cb02820.js",
+    "index.html": "./index.html",
+    "main.739a4b8b.css.map": "./static/css/main.739a4b8b.css.map",
+    "main.2cb02820.js.map": "./static/js/main.2cb02820.js.map"
   },
   "entrypoints": [
     "static/css/main.739a4b8b.css",
-    "static/js/main.19d0e5aa.js"
+    "static/js/main.2cb02820.js"
   ]
 }
