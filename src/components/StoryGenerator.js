@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../App.css";
-import { generateStory } from "../api"; // Import the API utility
 import axios from "axios"; // Import axios for API calls
 import CustomTags from "./CustomTags";
 import "./StoryGenerator.css"; // New styles for tags
@@ -8,7 +7,6 @@ import "./StoryGenerator.css"; // New styles for tags
 import { useEffect } from "react"; // Add useEffect to handle story fetching
 import { useNavigate } from "react-router-dom"; // Import for navigation
 
-import CustomDropdown from "./CustomDropdown";
 
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
 
@@ -20,7 +18,6 @@ const StoryGenerator = () => {
 
     const [tags, setTags] = useState([]);
     const [length, setLength] = useState("Medium");
-    const [story, setStory] = useState("");
     const [loading, setLoading] = useState(false);
     const [hasStories, setHasStories] = useState(false);
     const [saveMessage, setSaveMessage] = useState(""); // Save status message
@@ -47,7 +44,6 @@ const StoryGenerator = () => {
 
     const handleGenerateStory = async () => {
         setLoading(true);
-        setStory("");
         setEditedStory("");
         setSaveMessage("");
         setIsNewStory(true); // ✅ Set the flag for a new story
@@ -139,7 +135,7 @@ const StoryGenerator = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
     
-            setStory(editedStory);
+            setEditedStory(editedStory);
             setIsEditing(false);
             alert(response.data.message || "Story updated successfully!");
         } catch (error) {

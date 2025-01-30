@@ -1,4 +1,3 @@
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
 
 // Generate a story based on keywords and length
 export const generateStory = async (keywords, length) => {
