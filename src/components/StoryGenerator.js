@@ -73,7 +73,7 @@ const StoryGenerator = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token"); // Clear the token
-        window.location.href = "/login"; // Redirect to login page
+        navigate("/login"); // Redirect to login page
     };
 
     const handleSaveStory = async () => {
