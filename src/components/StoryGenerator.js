@@ -4,6 +4,8 @@ import axios from "axios"; // Import axios for API calls
 import CustomTags from "./CustomTags";
 import "./StoryGenerator.css"; // New styles for tags
 import { BiLogOut } from "react-icons/bi";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+
 
 import { useEffect } from "react"; // Add useEffect to handle story fetching
 import { useNavigate } from "react-router-dom"; // Import for navigation
@@ -194,6 +196,32 @@ const StoryGenerator = () => {
             console.error("Error fetching story:", error);
         }
     };
+
+    const handleDeleteStory = async (storyId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this story?");
+        if (!confirmDelete) return;
+    
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Please log in to delete stories.");
+                return;
+            }
+    
+            await axios.delete(`${API_BASE_URL}/stories/${storyId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+    
+            // Remove the deleted story from the frontend list
+            setSavedStories((prevStories) => prevStories.filter(story => story.story_id !== storyId));
+    
+            alert("Story deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting story:", error);
+            alert("Failed to delete the story.");
+        }
+    };
+    
     
     
     
@@ -237,9 +265,27 @@ const StoryGenerator = () => {
                     <h2 style={styles.savedStoriesHeading}>Saved Stories</h2>
                     <div style={styles.savedStoriesList}>
                         {savedStories.map((story) => (
-                            <div key={story.story_id} style={styles.storyItem} onClick={() => fetchFullStory(story.story_id)}>
-                                <p style={styles.sideStoryTitle}>{story.title}</p>
-                                <small>Tags: {story.keywords.join(", ")}</small>
+                            // <div key={story.story_id} style={styles.storyItem} onClick={() => fetchFullStory(story.story_id)}>
+                            //     <p style={styles.sideStoryTitle}>{story.title}</p>
+                            //     <small>Tags: {story.keywords.join(", ")}</small>
+                            //     <span 
+                            //         style={styles.deleteIcon} 
+                            //         onClick={() => handleDeleteStory(story.story_id)}
+                            //     >
+                            //         🗑️
+                            //     </span>
+                            // </div>
+                            <div key={story.story_id} style={styles.storyItem}>
+                                <div onClick={() => fetchFullStory(story.story_id)}>
+                                    <p style={styles.sideStoryTitle}>{story.title}</p>
+                                    <small>Tags: {story.keywords.join(", ")}</small>
+                                </div>
+                                <span 
+                                    style={styles.deleteIcon} 
+                                    onClick={() => handleDeleteStory(story.story_id)}
+                                >
+                                    <RiDeleteBin5Fill size={24}/>
+                                </span>
                             </div>
                         ))}
                     </div>
@@ -371,6 +417,31 @@ const styles = {
         marginTop: "auto", // ✅ Pushes logout button to the bottom
         paddingTop: "20px", // Adds spacing above the button
     },
+
+    storyItem: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between", // ✅ Pushes the delete icon to the extreme right
+        padding: "10px",
+        borderBottom: "1px solid #fff",
+        borderRadius: "9px",
+        cursor: "pointer",
+        transition: "background-color 0.2s ease",
+        backgroundColor: "#EFEEEE",
+        paddingBottom: "16px",
+    },
+    deleteIcon: {
+        fontSize: "10px",
+        color: "black",
+        cursor: "pointer",
+        marginLeft: "auto", // ✅ Pushes the delete icon to the extreme right
+        transition: "color 0.2s ease",
+    },
+    deleteIconHover: {
+        color: "#ff4d4d",
+    },
+    
+    
     
     storyText: {
         flexGrow: 1, // Takes up full height
@@ -445,6 +516,7 @@ const styles = {
         fontSize: "16px",
         fontWeight: "bold",
         marginBottom: "5px",
+        marginRight: "20px",
         cursor: "pointer",
     },
     
@@ -478,15 +550,15 @@ const styles = {
         padding: "10px", // Prevent text from touching the edges
         marginBottom: "10px",
     },
-    storyItem: {
-        padding: "10px",
-        borderBottom: "1px solid #fff",
-        borderRadius: "9px",
-        cursor: "pointer",
-        transition: "background-color 0.2s ease",
-        backgroundColor: "#EFEEEE",
-        paddingBottom: "16px",
-    },
+    // storyItem: {
+    //     padding: "10px",
+    //     borderBottom: "1px solid #fff",
+    //     borderRadius: "9px",
+    //     cursor: "pointer",
+    //     transition: "background-color 0.2s ease",
+    //     backgroundColor: "#EFEEEE",
+    //     paddingBottom: "16px",
+    // },
     storyItemHover: {
         backgroundColor: "#e9e9e9",
     },
